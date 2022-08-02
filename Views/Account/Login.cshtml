@@ -1,0 +1,63 @@
+﻿@model UserDto
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!-- For Demo Purpose -->
+<div class="text-center" style="margin:100px">
+    <h1>Account</h1>
+    @if (ViewBag.isHe is not null) {
+        <p class="text-danger">@ViewBag.isHe</p>
+    }
+    <!-- Registeration Form -->
+<form method="post" class="text-center">
+    <!-- Email Address -->
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                <i class="fa fa-envelope text-muted"></i>
+            </span>
+        </div>
+        <input id="email" asp-for="Email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <!-- Password -->
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                <i class="fa fa-lock text-muted"></i>
+            </span>
+        </div>
+        <input id="password" asp-for="Password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <!-- Submit Button -->
+    <div class="form-group">
+        <input type="submit" value="Login" class="btn btn-primary" />
+    </div>
+
+    <div class="text-center w-100">
+        <p class="text-muted font-weight-bold">Create an Account? <a asp-action="Register" class="text-primary ml-2">Registered</a></p>
+    </div>
+</form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+            $('input, select').on('focus', function () {
+                $(this).parent().find('.input-group-text').css('border-color', '#80bdff');
+            });
+            $('input, select').on('blur', function () {
+                $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
+            });
+        });
+    </script>
+}

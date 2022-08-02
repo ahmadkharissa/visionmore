@@ -1,0 +1,61 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "IndexWhere";
+}
+
+<br />
+<div class="row">
+    <div class="col-lg-6 text-info text-left" style="font-size:30px">
+        Product List
+    </div>
+</div>
+<hr />
+<form asp-action="IndexWhere" method="post" class="row">
+    <div class="input-group mb-3 col-5">
+        <span class="input-group-text" id="basic-addon1">Product Name</span>
+        <input type="text" name="name" class="form-control" aria-describedby="basic-addon1">
+        @foreach (var item in Model) {
+            <input type="hidden" name="Category" value="@item.Category">
+            break;
+        }
+    </div>
+    <div class="col-1">
+        <input type="submit" value="Search" class="btn btn-outline-info" />
+    </div>
+</form>
+<table id="myTable" class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Image
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Color
+            </th>
+            <th>
+                Available
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td><img src="~/images/@item.Image" style="width:150px" class="img-thumbnail img-rounded" /></td>
+                <td> @item.Name</td>
+                <td> @item.Category</td>
+                <td> @item.Price</td>
+                <td> @item.Color</td>
+                <td> @item.Available</td>
+            </tr>
+        }
+    </tbody>
+</table>

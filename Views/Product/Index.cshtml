@@ -1,0 +1,31 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+    List<string> Category = new List<string>();
+    foreach (var item in Model) {
+        if (Category.Contains(item.Category)) {
+            continue;
+        } else {
+            Category.Add(item.Category);
+        }
+    }
+}
+
+<br />
+<div class="row">
+    <div class="col-lg-6 text-info text-left" style="font-size:30px">
+        Category List
+    </div>
+    <div class="col-lg-6 text-right">
+        <a asp-action="Create" class="btn btn-info"> Add New Product</a>
+    </div>
+</div>
+<hr />
+<div class="list-group">
+    <button type="button" class="list-group-item list-group-item-action active">
+        Category
+    </button>
+    @foreach (var item in Category) {
+        <a asp-action="IndexWhere" asp-route-Category="@item" class="list-group-item list-group-item-action">@item</a>
+    }
+</div>

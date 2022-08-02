@@ -1,0 +1,103 @@
+﻿@model UserDto
+
+@{
+ViewData["Title"] = "Register";
+}
+<div style="margin:100px">
+    <!-- For Demo Purpose -->
+    <div class="col-12 text-center">
+        <h1>Create an Account</h1>
+    </div>
+
+    <!-- Registeration Form -->
+    <div class="col-md-6 col-lg-12 ml-auto">
+        <form asp-action="Register" method="post">
+            @if (ViewBag.exist != null) {
+                <div class="text-danger">@ViewBag.exist</div>
+            }
+            <div class="row">
+                <!-- Name -->
+                <div class="input-group col-lg-6 mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-white px-4 border-md border-right-0">
+                            <i class="fa fa-user text-muted"></i>
+                        </span>
+                    </div>
+                    <input id="firstName" asp-for="FirstName" placeholder="First Name" class="form-control bg-white border-left-0 border-md">
+                </div>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                <!-- Last Name -->
+                <div class="input-group col-lg-6 mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-white px-4 border-md border-right-0">
+                            <i class="fa fa-user text-muted"></i>
+                        </span>
+                    </div>
+                    <input id="lastName" asp-for="LastName" placeholder="Last Name" class="form-control bg-white border-left-0 border-md">
+                </div>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+
+
+                <!-- Email Address -->
+                <div class="input-group col-lg-12 mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-white px-4 border-md border-right-0">
+                            <i class="fa fa-envelope text-muted"></i>
+                        </span>
+                    </div>
+                    <input id="email" asp-for="Email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+
+                <!-- Password -->
+                <div class="input-group col-lg-6 mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-white px-4 border-md border-right-0">
+                            <i class="fa fa-lock text-muted"></i>
+                        </span>
+                    </div>
+                    <input id="password" asp-for="Password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+                <!-- Password Confirmation -->
+                <div class="input-group col-lg-6 mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text bg-white px-4 border-md border-right-0">
+                            <i class="fa fa-lock text-muted"></i>
+                        </span>
+                    </div>
+                    <input id="passwordConfirmation" asp-for="ConfirmPasswod" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
+                </div>
+                <span asp-validation-for="ConfirmPasswod" class="text-danger"></span>
+
+                <!-- Submit Button -->
+                <div class="form-group col-lg-12 mx-auto mb-0 text-center">
+                    <input type="submit" value="Create account" class="btn btn-primary" />
+                </div>
+                <br /><br />
+
+                <!-- Already Registered -->
+                <div class="text-center w-100">
+                    <p class="text-muted font-weight-bold">Already Registered? <a asp-action="Login" class="text-primary ml-2">Login</a></p>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script>
+            $(function () {
+                $('input, select').on('focus', function () {
+                    $(this).parent().find('.input-group-text').css('border-color', '#80bdff');
+                });
+                $('input, select').on('blur', function () {
+                    $(this).parent().find('.input-group-text').css('border-color', '#ced4da');
+                });
+            });
+        </script>
+    }
